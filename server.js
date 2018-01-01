@@ -121,19 +121,21 @@ app.get("/scrape", function(req, res) {
         });
     });
   });
-});
+}).then(
+  // Route for getting all Articles from the db
+  app.get("/articles", function(req, res) {
+    // TODO: Finish the route so it grabs all of the articles
+    db.Articles
+      .find({})
+      .then(function(dbArticle){
+        res.json(dbArticle)
+      }).catch(function(err){
+        res.json(err);
+      });
+  });
+));
 
-// Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
-  db.Articles
-    .find({})
-    .then(function(dbArticle){
-      res.json(dbArticle)
-    }).catch(function(err){
-      res.json(err);
-    });
-});
+
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
@@ -167,6 +169,28 @@ app.post("/articles/:id", function(req, res) {
     res.json(err);
   })
 });
+
+// POST route for saving a new Book to the db and associating it with a Library
+app.post("/submit", function(req, res) {
+  // Create a new Book in the database
+  db.Note
+    .create(req.body)
+    .then(function(dbNote) {
+      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.Note.findOneAndUpdate({}, { $push: { books: dbBook._id } }, { new: true });
+    })
+    .then(function(dbLibrary) {
+      // If the Library was updated successfully, send it back to the client
+      res.json(dbLibrary);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
 
 // Start the server
 app.listen(PORT, function() {
