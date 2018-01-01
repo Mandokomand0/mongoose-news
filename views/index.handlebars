@@ -1,0 +1,68 @@
+<div class="page-header" style="margin: 40px 107.5px 20px 107.5px">
+
+      <h1 class="text-center"><span class="glyphicon glyphicon-eye-open"></span> <a href="http://localhost:3000/" style="color:white; font-size:70px">Mongoose News</a></h1>
+
+
+      <h1 class="text-right">
+      <span class="glyphicon glyphicon-pencil"></span><a href="http://localhost:3000/signup" style="text-decoration: none; margin-right: 20px"> My Account</a>
+      <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://localhost:3000/cart/1" style="text-decoration: none"> Cart</a></h1>
+</div>
+<div class="container">
+<div class="jumbotron">
+      <h2 class="text-center">
+       Get your fix on all the most important news stories!
+     </h2>
+      <br>
+
+      <!-- <div class="text-center">
+
+      <div class="btn-group" role="group" aria-label="Basic example" style="margin-right: 50px">
+        <label class="btn btn-default"><input type="radio" name="flavorGroup" id="distance" data-bind="checked: spamFlavor" /> Distance</label>
+        <label class="btn btn-default"><input type="radio" name="flavorGroup" id="mass" data-bind="checked: spamFlavor" /> Mass</label>
+        <label class="btn btn-default"><input type="radio" name="flavorGroup" id="xray" data-bind="checked: spamFlavor" /> X-ray exposure</label>
+      </div>
+
+      <div class="btn-group" role="group" aria-label="Basic example" style="margin-right: 50px">
+        <label class="btn btn-default"><input type="radio" name="flavorGroup2" id="asc" data-bind="checked: spamFlavor" /> Ascending</label>
+        <label class="btn btn-default"><input type="radio" name="flavorGroup2" id="desc" data-bind="checked: spamFlavor" /> Descending</label>
+      </div>
+
+
+      	<button type="button" class="btn btn-lg btn-danger" id="orderBy" data-col="" data-condition="">Find</button>
+
+      </div> -->
+
+
+
+</div>
+
+<table class="table table-condensed" id="searchTable">
+    <thead>
+      <tr>
+        <th>Article Title</th>
+        <th>Summary</th>
+        <!--This should be the column where a button that allows you to leave comments on the -->
+        <th>Show comments</th>
+        <!--This column should be the location of where a botton is located that will allow viewrs to leave comments-->
+        <th>Leave a comment</th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+  {{#each article}}
+    {{> article/news-block}}
+  {{/each}}
+
+
+  <footer class="footer">
+      <div class="container">
+        <p> <a href="https://github.com/Ringo003/project-2" target="_blank">GitHub Repo</a></p>
+      </div>
+    </footer>
+</div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
