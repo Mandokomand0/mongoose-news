@@ -1,4 +1,5 @@
 // @comment: Homework 18 - Web Scraper with Express, Handlebars, MongoDB and Cheerio
+//https://cryptic-basin-42622.herokuapp.com/
 
 
 // Node Dependencies
@@ -10,6 +11,7 @@ var mongoose = require('mongoose');
 
 var logger = require('morgan'); // for debugging
 var request = require('request'); // for web-scraping
+var axios = require("axios");
 var cheerio = require('cheerio'); // for web-scraping
 
 // Initialize Express for debugging & body parsing
@@ -38,7 +40,7 @@ app.set('view engine', 'handlebars');
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 
-var db = process.env.MONGO_URI || "mongodb://root:root@ds013901.mlab.com:13901/innovatefinancial100";
+var db = process.env.MONGO_URI || "mongodb://root:root@ds113626.mlab.com:13901/13626/mongoose-news";
 
   mongoose.Promise = Promise;
 //  mongoose.connect('mongodb://localhost/news-goose', {
@@ -86,11 +88,10 @@ app.listen(port, function(){
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-var axios = require("axios");
-var cheerio = require("cheerio");
+
 
 // A GET route for scraping the echojs website
-app.get("/scrape", function(req, res) {
+app.get("/", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("http://www.asahi.com/ajw/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -121,7 +122,7 @@ app.get("/scrape", function(req, res) {
         });
     });
   });
-}).then(
+}.then(
   // Route for getting all Articles from the db
   app.get("/articles", function(req, res) {
     // TODO: Finish the route so it grabs all of the articles
@@ -133,7 +134,7 @@ app.get("/scrape", function(req, res) {
         res.json(err);
       });
   });
-));
+);
 
 
 
